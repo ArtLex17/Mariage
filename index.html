@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariage Justin & Khady</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Styles inchangés */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #fef9f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 400;
+            color: #4a2c2c;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+        .hero h1 span {
+            color: #b76e79;
+            font-weight: 300;
+        }
+
+        .message-motivation {
+            background: #ffffffdb;
+            padding: 1.8rem;
+            border-radius: 40px;
+            margin-bottom: 2rem;
+            border: 1px solid #f0dac8;
+            font-size: 1.3rem;
+            color: #3e2b23;
+            box-shadow: 0 8px 20px -10px #b76e7940;
+            text-align: center;
+        }
+
+        .photos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0 2rem;
+        }
+        .photo-card {
+            flex: 1 1 260px;
+            max-width: 300px;
+            background: transparent;
+            border-radius: 40px;
+            padding: 0;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .photo-card:hover {
+            transform: translateY(-6px);
+        }
+        .photo-card .img-wrapper {
+            width: 100%;
+            height: 280px;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 15px 25px -10px #a37464;
+            margin-bottom: 1rem;
+        }
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            display: block;
+            pointer-events: none;
+        }
+        .photo-card .category {
+            font-size: 1.7rem;
+            font-weight: 500;
+            text-align: center;
+            color: #7e4f44;
+            background: #ffefe6;
+            padding: 0.7rem 1rem;
+            border-radius: 60px;
+            border: 1px solid #e7cbb8;
+            box-shadow: 0 4px 8px #e9d5c6;
+        }
+
+        .message-couple {
+            background: #fef9f4;
+            padding: 2rem;
+            border-radius: 40px;
+            margin: 2rem 0 2rem;
+            border-left: 10px solid #b76e79;
+            box-shadow: 0 10px 25px -15px #8b5a4c;
+        }
+        .message-couple p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            font-style: italic;
+            color: #3e2e26;
+        }
+        .message-couple .signature {
+            margin-top: 1.5rem;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 1.6rem;
+            text-align: right;
+            color: #6b4f44;
+        }
+
+        .dynamic-section {
+            display: none;
+            margin: 3rem 0 2rem;
+        }
+        .confirmation-card {
+            background: white;
+            border-radius: 50px;
+            padding: 2rem 2rem 2rem;
+            box-shadow: 0 25px 35px -15px rgba(120, 70, 60, 0.25);
+            border: 1px solid #f5dfcf;
+            margin-bottom: 2rem;
+        }
+        .category-badge {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #5f3d34;
+            background: #f3e1d6;
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            border: 1px solid #dcb9a8;
+        }
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .rsvp-form input {
+            padding: 1.2rem 1.5rem;
+            border: 1.5px solid #edd7c8;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            background: #fefcfa;
+        }
+        .rsvp-form input:focus {
+            outline: none;
+            border-color: #b76e79;
+            box-shadow: 0 0 0 4px #f3d9d1;
+        }
+        .rsvp-form button {
+            background: #b76e79;
+            border: none;
+            color: white;
+            padding: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid #a75d68;
+        }
+        .rsvp-form button:hover {
+            background: #a75d68;
+        }
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 60px;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .reception-section {
+            background: #fffaf5;
+            border-radius: 50px;
+            padding: 2rem 2rem;
+            border: 1px solid #f0d6c4;
+            box-shadow: 0 15px 25px -15px #be907b;
+        }
+        .reception-section h2 {
+            font-size: 2.2rem;
+            font-weight: 350;
+            color: #4d3333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px dashed #d4b6a0;
+            padding-bottom: 1rem;
+        }
+        .address-block {
+            background: #f5e7dd;
+            padding: 1.8rem;
+            border-radius: 40px;
+            margin-bottom: 2rem;
+        }
+        .address-block strong {
+            font-size: 1.5rem;
+            color: #3b2b22;
+        }
+        .address-block p {
+            font-size: 1.1rem;
+            margin-top: 8px;
+        }
+        .map-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .app-button {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 1rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            border: 1.5px solid #edd7c8;
+            transition: 0.2s;
+        }
+        .app-button:hover {
+            background: #f9ede4;
+            border-color: #b76e79;
+        }
+        .app-button img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 3rem;
+            color: #8e7a6f;
+            border-top: 2px dotted #dccbbd;
+            padding-top: 2rem;
+        }
+        #exportLink {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 0.5rem;
+        }
+        #exportLink:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero" id="heroTitle">
+        <h1>Justin <span>&</span> Khady</h1>
+    </div>
+
+    <div class="message-motivation">
+        <i class="fas fa-heart" style="color:#b76e79; margin-right: 12px;"></i> 
+        « Un mariage, c'est l'histoire de deux âmes qui décident de ne faire qu'une. Nous sommes impatients de célébrer cet amour avec vous. »
+    </div>
+
+    <!-- Photos dans l'ordre : mariée, couple, marié -->
+    <div class="photos-grid">
+        <div class="photo-card" data-category="bride" id="photoBride">
+            <div class="img-wrapper">
+                <img src="Photo_Alexis.jpg" alt="Khady & amie">
+            </div>
+            <div class="category">Proches de la mariée</div>
+        </div>
+        <div class="photo-card" data-category="couple" id="photoCouple">
+            <div class="img-wrapper">
+                <img src="Photo_Alexis.jpg" alt="Justin & Khady">
+            </div>
+            <div class="category">Proches du couple</div>
+        </div>
+        <div class="photo-card" data-category="groom" id="photoGroom">
+            <div class="img-wrapper">
+                <img src="Photo_Alexis.jpg" alt="Justin & ami">
+            </div>
+            <div class="category">Proches du marié</div>
+        </div>
+    </div>
+
+    <div class="message-couple">
+        <p>✨ Chers parents, amis, complices,</p>
+        <p>Votre présence à nos côtés sera le plus beau des cadeaux. Nous avons hâte de partager cette journée unique avec vous, de danser, rire et créer des souvenirs inoubliables. Merci de faire partie de notre histoire.</p>
+        <div class="signature">— Justin & Khady</div>
+    </div>
+
+    <div class="dynamic-section" id="dynamicSection">
+        <div class="confirmation-card">
+            <div class="category-badge" id="currentCategoryLabel">Proches de la mariée</div>
+            <form id="rsvpForm" class="rsvp-form">
+                <input type="text" id="name" placeholder="Prénom & Nom" required>
+                <input type="tel" id="phone" placeholder="Téléphone" required>
+                <!-- Plus de valeur par défaut, juste le placeholder -->
+                <input type="number" id="guests" min="1" max="10" placeholder="Nombre de personnes" required>
+                <button type="submit">Confirmer ma présence</button>
+                <div id="formSuccess" class="success-message">✓ Merci ! Votre réponse a été enregistrée.</div>
+            </form>
+        </div>
+
+        <div class="reception-section">
+            <h2><i class="fas fa-map-marker-alt"></i> Lieu de réception</h2>
+            <div class="address-block">
+                <strong>Domaine de l’Orangerie</strong>
+                <p>Route de Bingerville, Abidjan</p>
+                <p><i class="fas fa-map-pin"></i> 5.3456, -4.0123</p>
+                <p><i class="far fa-clock"></i> Samedi 24 mai 2025 · Accueil dès 16h, cérémonie 17h</p>
+            </div>
+            <div class="map-links">
+                <a href="https://www.google.com/maps/search/?api=1&query=Domaine+de+l'Orangerie+Abidjan" target="_blank" class="app-button"><img src="https://img.icons8.com/color/48/000000/google-maps.png" alt="Google Maps"><span>Google Maps</span></a>
+                <a href="https://maps.yango.com/?ll=-4.0123%2C5.3456&z=17&text=Domaine%20de%20l%27Orangerie" target="_blank" class="app-button"><img src="https://play-lh.googleusercontent.com/CE60CM92zHfU9PoEVyMZ1g8TewM-YjZbms95z1TOhO2RgnJX6JgB9TICZqMcdNf4ww" alt="Yango" style="border-radius: 8px;"><span>Yango</span></a>
+                <a href="https://indrive.com/en/trip" target="_blank" class="app-button"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/84/6b/35/846b3581-dbda-c0c1-c6ab-bf3630a746fc/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/230x0w.webp" alt="InDrive"><span>InDrive</span></a>
+                <a href="https://m.uber.com/ul/?action=setPickup&client_id=&pickup=my_location&dropoff[formatted_address]=Domaine%20de%20l'Orangerie%20Abidjan&dropoff[latitude]=5.3456&dropoff[longitude]=-4.0123" target="_blank" class="app-button"><i class="fab fa-uber" style="color:#000; font-size: 1.6rem;"></i><span>Uber</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <p><i class="far fa-heart"></i> Justin & Khady <i class="far fa-heart"></i></p>
+        <p id="exportLink"></p>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const dynamicSection = document.getElementById('dynamicSection');
+        const categoryLabel = document.getElementById('currentCategoryLabel');
+        const rsvpForm = document.getElementById('rsvpForm');
+        const nameInput = document.getElementById('name');
+        const phoneInput = document.getElementById('phone');
+        const guestsInput = document.getElementById('guests');
+        const successDiv = document.getElementById('formSuccess');
+
+        // === REMPLACEZ PAR VOTRE URL ===
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZZVFh-bEeRQnpcWLNBsH7kk-pLaB971-ATq5tggEYadYU-U2-8Dib_A8kY-uAmYXe/exec';  // <-- CHANGEZ ICI
+
+        function setCategory(cat) {
+            if (cat === 'bride') categoryLabel.textContent = 'Proches de la mariée';
+            else if (cat === 'couple') categoryLabel.textContent = 'Proches du couple';
+            else if (cat === 'groom') categoryLabel.textContent = 'Proches du marié';
+            rsvpForm.dataset.category = cat;
+        }
+
+        document.getElementById('photoBride').addEventListener('click', () => {
+            setCategory('bride');
+            dynamicSection.style.display = 'block';
+            dynamicSection.scrollIntoView({ behavior: 'smooth' });
+        });
+        document.getElementById('photoCouple').addEventListener('click', () => {
+            setCategory('couple');
+            dynamicSection.style.display = 'block';
+            dynamicSection.scrollIntoView({ behavior: 'smooth' });
+        });
+        document.getElementById('photoGroom').addEventListener('click', () => {
+            setCategory('groom');
+            dynamicSection.style.display = 'block';
+            dynamicSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        rsvpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const cat = rsvpForm.dataset.category;
+            if (!cat) {
+                alert('Erreur : catégorie inconnue');
+                return;
+            }
+
+            const fullname = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const guests = parseInt(guestsInput.value, 10);
+
+            if (!fullname || !phone || !guests || guests < 1) {
+                alert('Merci de remplir tous les champs correctement.');
+                return;
+            }
+
+            // Préparer les données à envoyer (avec les noms attendus par le script)
+            const formData = new URLSearchParams();
+            formData.append('categorie', categoryLabel.textContent);
+            formData.append('nomComplet', fullname);
+            formData.append('telephone', phone);
+            formData.append('nbPlaces', guests);
+
+            // Envoyer vers Google Apps Script
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData,
+                redirect: 'follow'  // important pour gérer les redirections de Google
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    successDiv.style.display = 'block';
+                    nameInput.value = '';
+                    phoneInput.value = '';
+                    guestsInput.value = '';
+                    setTimeout(() => successDiv.style.display = 'none', 3000);
+                } else {
+                    alert('Erreur lors de l\'envoi : ' + (data.error || 'inconnue'));
+                    console.error('Détails:', data);
+                }
+            })
+            .catch(error => {
+                alert('Erreur réseau : ' + error.message);
+                console.error('Erreur complète:', error);
+            });
+        });
+
+        // Lien "Merci" : ouvre directement le Google Sheet (pratique pour vous)
+        document.getElementById('exportLink').addEventListener('click', function() {
+            const sheetId = '1cZsZHpR8RuVgYxH6yw3EebknKagA2_oqqx475f8Qok8'; // Remplacez par votre ID
+            window.open('https://docs.google.com/spreadsheets/d/' + sheetId, '_blank');
+        });
+    })();
+</script>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💒</text></svg>">
+</body>
+</html>
